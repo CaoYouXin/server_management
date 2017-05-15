@@ -1,3 +1,47 @@
-<h1>
-  {{title}}
+<h1 class="title">
+  <i></i>{{title}}
 </h1>
+
+<hr>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>名称</th>
+      <th>状态</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let server of servers">
+      <td>{{server.type}}</td>
+      <td>{{server.name}}</td>
+      <td>
+        <div class="status">
+          <span class="status zip" *ngIf="server.status === 'zip'"></span>
+          <span class="status stop" *ngIf="server.status === 'stop'"></span>
+          <span class="status running" *ngIf="server.status === 'running'">
+          <!--<i class="left before"></i>-->
+            <!--<i class="left after"></i>-->
+            <!--<i class="right-up before"></i>-->
+            <!--<i class="right-up after"></i>-->
+            <!--<i class="right-down before"></i>-->
+            <!--<i class="right-down after"></i>-->
+          </span>
+          <!--<span>{{server.status}}</span>-->
+        </div>
+      </td>
+      <td>
+        <div class="btn" *ngIf="!server.deployed" (click)="deploy(server.name)">部署</div>
+        <div class="btn" *ngIf="server.deployed">配置</div>
+        <div class="btn" *ngIf="server.deployed && server.status !== 'running'" (click)="start(server.name)">启动</div>
+        <div class="btn" *ngIf="server.deployed && server.status === 'running'" (click)="stop(server.name)">关闭</div>
+        <div class="btn" *ngIf="server.deployed && server.status === 'running'" (click)="restart(server.name)">重启</div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="btn">上传</div>
+<iframe id="iframe" frameborder="0" width="0" height="0" src="http://localhost:8080/server_management/upload.html"></iframe>

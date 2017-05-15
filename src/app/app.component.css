@@ -1,0 +1,268 @@
+h1.title {
+  text-shadow: 1px 1px 2px black, 0 0 1em #00ff00, 0 0 0.5em #0000ff, 0 0 0.2em #fff000;
+  color: white;
+  margin: .5em 0 0 .5em;
+}
+
+h1.title i {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background: url("./assets/server.png") no-repeat center;
+  background-size: contain;
+  margin-right: .3em;
+}
+
+hr {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: #000;
+  box-shadow: 0 3px 3px #0000ff;
+}
+
+table {
+  width: 100%;
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  line-height: 2em;
+  text-align: center;
+}
+
+th {
+  font-size: 1.3em;
+  font-weight: 900;
+  background-color: #cac5ff;
+}
+
+td {
+  font-size: 1em;
+}
+
+tr:nth-child(odd) > td {
+  background-color: #cdffd2;
+}
+
+tr:nth-child(even) > td {
+  background-color: #edffd5;
+}
+
+div.status {
+
+}
+
+span.status {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-size: contain;
+}
+
+span.status.zip {
+  background-image: url("./assets/zip.png");
+}
+
+span.status.stop {
+  background-image: url("./assets/stop.png");
+}
+
+span.status.running {
+  background-image: url("./assets/running.png");
+}
+
+.btn {
+  float: left;
+  margin-left: 1em;
+
+  border: solid 1px #111;
+  border-radius: 20%;
+
+  padding: 0 0.5em;
+
+  cursor: default;
+}
+
+.btn:hover {
+  color: white;
+  background-color: #333;
+}
+
+/* 试验品 */
+span.status > i.left {
+  position: absolute;
+  top: 0;
+  left: -25.98px;
+
+  display: inline-block;
+  width: 3px;
+  height: 30px;
+  background: #000000;
+}
+
+@keyframes move_left_before {
+  form {
+    transform: scaleY(1);
+  }
+
+  50% {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(0);
+  }
+}
+
+span.status > i.left.before {
+  transform-origin: 50% 0;
+
+  animation: 4s linear 0s infinite;
+  animation-name: move_left_before;
+}
+
+@keyframes move_left_after {
+  form {
+    transform: scaleY(0);
+  }
+
+  50% {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+span.status > i.left.after {
+  transform-origin: 50% 100%;
+  transform: scaleY(0);
+
+  animation: 4s linear 0s infinite;
+  animation-name: move_left_after;
+}
+
+span.status > i.right-up {
+  position: absolute;
+
+  display: inline-block;
+  width: 30px;
+  height: 3px;
+  background: #000000;
+}
+
+@keyframes move_right-up_before {
+  form {
+    transform: rotateZ(30deg) scaleX(0);
+  }
+
+  50% {
+    transform: rotateZ(30deg) scaleX(0);
+  }
+
+  to {
+    transform: rotateZ(30deg) scaleX(1);
+  }
+}
+
+span.status > i.right-up.before {
+  transform-origin: 0 50%;
+
+  top: 0;
+  left: -25.98px;
+  transform: rotateZ(30deg) scaleX(0);
+
+  animation: 4s linear 0.1s infinite;
+  animation-name: move_right-up_before;
+}
+
+@keyframes move_right-up_after {
+  form {
+    transform: rotateZ(30deg) scaleX(1);
+  }
+
+  50% {
+    transform: rotateZ(30deg) scaleX(0);
+  }
+
+  to {
+    transform: rotateZ(30deg) scaleX(0);
+  }
+}
+
+span.status > i.right-up.after {
+  transform-origin: 100% 50%;
+
+  top: 15px;
+  left: -30px;
+  transform: rotateZ(30deg) scaleX(1);
+
+  animation: 4s linear 0s infinite;
+  animation-name: move_right-up_after;
+}
+
+span.status > i.right-down {
+  position: absolute;
+
+  display: inline-block;
+  width: 30px;
+  height: 3px;
+  background: #000000;
+}
+
+@keyframes move_right-down_before {
+  form {
+    transform: rotateZ(-30deg) scaleX(1);
+  }
+
+  50% {
+    transform: rotateZ(-30deg) scaleX(0);
+  }
+
+  to {
+    transform: rotateZ(-30deg) scaleX(0);
+  }
+}
+
+span.status > i.right-down.before {
+  transform-origin: 0 50%;
+
+  top: 30px;
+  left: -25.98px;
+  transform: rotateZ(-30deg) scaleX(1);
+
+  animation: 4s linear 0s infinite;
+  animation-name: move_right-down_before;
+}
+
+@keyframes move_right-down_after {
+  form {
+    transform: rotateZ(-30deg) scaleX(0);
+  }
+
+  50% {
+    transform: rotateZ(-30deg) scaleX(0);
+  }
+
+  to {
+    transform: rotateZ(-30deg) scaleX(1);
+  }
+}
+
+span.status > i.right-down.after {
+  transform-origin: 100% 50%;
+
+  top: 15px;
+  left: -30px;
+  transform: rotateZ(-30deg) scaleX(0);
+
+  animation: 4s linear 0s infinite;
+  animation-name: move_right-down_after;
+}
