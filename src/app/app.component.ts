@@ -1,8 +1,9 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
 import {DaoUtil} from "../dao/dao.util";
 import {API} from "../api/api.const";
 import "rxjs/add/operator/map";
 import {FileUploader} from "ng2-file-upload";
+import {environment} from "../environments/environment";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ import {FileUploader} from "ng2-file-upload";
 export class AppComponent implements OnInit {
   title = '服务器管理器';
   servers = [];
-  uploader:FileUploader = new FileUploader({
+  uploader: FileUploader = new FileUploader({
     url: "http://localhost:8080/server_management/upload",
     isHTML5: true
   });
@@ -28,10 +29,11 @@ export class AppComponent implements OnInit {
 
   private editor: any;
 
-  constructor(private dao: DaoUtil) {}
+  constructor(private dao: DaoUtil) {
+  }
 
   ngOnInit() {
-    API.setProductMode(false);
+    API.setProductMode(environment.production);
     this.loadServers(0);
 
     this.editor = window['CodeMirror'].fromTextArea(this.scTextarea.nativeElement, {

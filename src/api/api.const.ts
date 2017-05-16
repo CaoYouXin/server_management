@@ -3,7 +3,7 @@ export class API {
   static mode: string;
   static api = {
     "server/list": {
-      "prod": "",
+      "prod": "/server_management/server/list",
       "dev": "http://localhost:8080/server_management/server/list"
     },
     "server/manipulation": {
@@ -19,8 +19,8 @@ export class API {
       "dev": "http://localhost:8080/server_management/server/config"
     },
     "server/config/get": {
-      "prod": function () {
-
+      "prod": function (serverName) {
+        return `/server_management/server/config/get?serverName=${serverName}`;
       },
       "dev": function (serverName) {
         return `http://localhost:8080/server_management/server/config/get?serverName=${serverName}`;
