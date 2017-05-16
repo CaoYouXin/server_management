@@ -87,6 +87,7 @@ span.status.running {
   padding: 0 0.5em;
 
   cursor: default;
+  outline: none;
 }
 
 .btn:hover {
@@ -265,4 +266,21 @@ span.status > i.right-down.after {
 
   animation: 4s linear 0s infinite;
   animation-name: move_right-down_after;
+}
+
+.progress {
+  background-color: #333333;
+}
+
+.progress-bar {
+  background-color: #00ff1f;
+}
+
+.progress, .progress-bar {
+  height: 10px;
+}
+
+.btn-s {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

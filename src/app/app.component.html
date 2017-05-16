@@ -6,42 +6,105 @@
 
 <table>
   <thead>
-    <tr>
-      <th>类型</th>
-      <th>名称</th>
-      <th>状态</th>
-      <th>操作</th>
-    </tr>
+  <tr>
+    <th>类型</th>
+    <th>名称</th>
+    <th>状态</th>
+    <th>操作</th>
+  </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let server of servers">
-      <td>{{server.type}}</td>
-      <td>{{server.name}}</td>
-      <td>
-        <div class="status">
-          <span class="status zip" *ngIf="server.status === 'zip'"></span>
-          <span class="status stop" *ngIf="server.status === 'stop'"></span>
-          <span class="status running" *ngIf="server.status === 'running'">
+  <tr *ngFor="let server of servers">
+    <td>{{server.type}}</td>
+    <td>{{server.name}}</td>
+    <td>
+      <div class="status">
+        <span class="status zip" *ngIf="server.status === 'zip'"></span>
+        <span class="status stop" *ngIf="server.status === 'stop'"></span>
+        <span class="status running" *ngIf="server.status === 'running'">
           <!--<i class="left before"></i>-->
-            <!--<i class="left after"></i>-->
-            <!--<i class="right-up before"></i>-->
-            <!--<i class="right-up after"></i>-->
-            <!--<i class="right-down before"></i>-->
-            <!--<i class="right-down after"></i>-->
+          <!--<i class="left after"></i>-->
+          <!--<i class="right-up before"></i>-->
+          <!--<i class="right-up after"></i>-->
+          <!--<i class="right-down before"></i>-->
+          <!--<i class="right-down after"></i>-->
           </span>
-          <!--<span>{{server.status}}</span>-->
-        </div>
-      </td>
-      <td>
-        <div class="btn" *ngIf="!server.deployed" (click)="deploy(server.name)">部署</div>
-        <div class="btn" *ngIf="server.deployed">配置</div>
-        <div class="btn" *ngIf="server.deployed && server.status !== 'running'" (click)="start(server.name)">启动</div>
-        <div class="btn" *ngIf="server.deployed && server.status === 'running'" (click)="stop(server.name)">关闭</div>
-        <div class="btn" *ngIf="server.deployed && server.status === 'running'" (click)="restart(server.name)">重启</div>
-      </td>
-    </tr>
+        <!--<span>{{server.status}}</span>-->
+      </div>
+    </td>
+    <td>
+      <button class="btn" *ngIf="!server.deployed" (click)="deploy(server.name)">部署</button>
+      <button class="btn" *ngIf="server.deployed">配置</button>
+      <button class="btn" *ngIf="server.deployed && server.status !== 'running'" (click)="start(server.name)">启动
+      </button>
+      <button class="btn" *ngIf="server.deployed && server.status === 'running'" (click)="stop(server.name)">关闭</button>
+      <button class="btn" *ngIf="server.deployed && server.status === 'running'" (click)="restart(server.name)">重启
+      </button>
+    </td>
+  </tr>
   </tbody>
 </table>
 
-<div class="btn">上传</div>
-<iframe id="iframe" frameborder="0" width="0" height="0" src="http://localhost:8080/server_management/upload.html"></iframe>
+<div>
+  <div>
+    <input #FileInput type="file" style="display: none;" ng2FileSelect [uploader]="uploader"/>
+    <button class="btn" (click)="selectFile()">选择文件</button>&nbsp;&nbsp;<span>Queue Progress :</span>
+    <div class="progress" style="">
+      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+    </div>
+  </div>
+  <button type="button" class="btn btn-success btn-s"
+          (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+    <span class="glyphicon glyphicon-upload"></span> Upload all
+  </button>
+  <button type="button" class="btn btn-warning btn-s"
+          (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+    <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+  </button>
+  <button type="button" class="btn btn-danger btn-s"
+          (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+    <span class="glyphicon glyphicon-trash"></span> Remove all
+  </button>
+</div>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th width="50%">Name</th>
+    <th>Size</th>
+    <th>Progress</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of uploader.queue">
+    <td><strong>{{ item?.file?.name }}</strong></td>
+    <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+    <td *ngIf="uploader.options.isHTML5">
+      <div class="progress" style="margin-bottom: 0;">
+        <div class="progress-bar" role="progressbar" [style.width]="item.progress + '%'"></div>
+      </div>
+    </td>
+    <td class="text-center">
+      <span *ngIf="item.isSuccess">已上传</span>
+      <span *ngIf="item.isCancel">已取消</span>
+      <span *ngIf="item.isError">出错</span>
+    </td>
+    <td nowrap>
+      <button type="button" class="btn btn-success btn-xs"
+              (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+        Upload
+      </button>
+      <button type="button" class="btn btn-warning btn-xs"
+              (click)="item.cancel()" [disabled]="!item.isUploading">
+        Cancel
+      </button>
+      <button type="button" class="btn btn-danger btn-xs"
+              (click)="item.remove()">
+        Remove
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
