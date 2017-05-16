@@ -111,9 +111,9 @@
 
 <div class="configs" [class.show]="showConfigs">
   <textarea #scTextarea ></textarea>
-  <div>
+  <div style="margin-top: 10px;">
     <button class="btn" (click)="submitServerConfigs()">提交</button>
-    <button class="btn" (click)="serverConfigs = ''">重置</button>
+    <button class="btn" (click)="editor.getDoc().setValue('')">清空</button>
     <button class="btn" (click)="showConfigs = false">取消</button>
   </div>
 </div>
