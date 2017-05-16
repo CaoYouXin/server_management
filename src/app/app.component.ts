@@ -37,7 +37,6 @@ export class AppComponent implements OnInit {
     this.editor = window['CodeMirror'].fromTextArea(this.scTextarea.nativeElement, {
       lineNumbers: true
     });
-    console.log(this.editor);
   }
 
   selectFile() {
