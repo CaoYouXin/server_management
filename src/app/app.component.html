@@ -34,7 +34,7 @@
     </td>
     <td>
       <button class="btn" *ngIf="!server.deployed" (click)="deploy(server.name)">部署</button>
-      <button class="btn" *ngIf="server.deployed">配置</button>
+      <button class="btn" *ngIf="server.deployed" (click)="config(server.name)">配置</button>
       <button class="btn" *ngIf="server.deployed && server.status !== 'running'" (click)="start(server.name)">启动
       </button>
       <button class="btn" *ngIf="server.deployed && server.status === 'running'" (click)="stop(server.name)">关闭</button>
@@ -55,15 +55,15 @@
   </div>
   <button type="button" class="btn btn-success btn-s"
           (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-    <span class="glyphicon glyphicon-upload"></span> Upload all
+    Upload all
   </button>
   <button type="button" class="btn btn-warning btn-s"
           (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
-    <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+    Cancel all
   </button>
   <button type="button" class="btn btn-danger btn-s"
           (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-    <span class="glyphicon glyphicon-trash"></span> Remove all
+    Remove all
   </button>
 </div>
 
@@ -108,3 +108,12 @@
   </tr>
   </tbody>
 </table>
+
+<div class="configs" [class.show]="showConfigs">
+  <textarea [(ngModel)]="serverConfigs"></textarea>
+  <div>
+    <button class="btn" (click)="submitServerConfigs()">提交</button>
+    <button class="btn" (click)="serverConfigs = ''">重置</button>
+    <button class="btn" (click)="showConfigs = false">取消</button>
+  </div>
+</div>

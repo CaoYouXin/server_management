@@ -17,6 +17,9 @@ export class AppComponent implements OnInit {
     url: "http://localhost:8080/server_management/upload",
     isHTML5: true
   });
+  showConfigs = false;
+  serverConfigs: string;
+  configServerName: string;
 
   @ViewChild("FileInput")
   private fileInput: ElementRef;
@@ -32,6 +35,36 @@ export class AppComponent implements OnInit {
     this.fileInput.nativeElement.click();
   }
 
+  config(name: string) {
+    let self = this;
+    this.dao.get(API.getAPI("server/config/get")(name))
+      .map(res => res.json())
+      .subscribe(ret => {
+        if (ret.code === 20000) {
+          self.showConfigs = true;
+          self.serverConfigs = ret.body;
+          self.configServerName = name;
+        } else {
+          alert(ret.body);
+        }
+      }, error => DaoUtil.logError(error));
+  }
+
+  submitServerConfigs() {
+    let self = this;
+    this.dao.post(API.getAPI("server/config"), {
+      serverName: this.configServerName,
+      configs: this.serverConfigs
+    }).map(res => res.json())
+      .subscribe(ret => {
+        if (ret.code === 20000) {
+          self.showConfigs = false;
+        } else {
+          alert(ret.body);
+        }
+      }, error => DaoUtil.logError(error));
+  }
+
   loadServers(delay: number) {
     let self = this;
     setTimeout(() => {
@@ -41,7 +74,7 @@ export class AppComponent implements OnInit {
           if (ret.code === 20000) {
             self.servers = ret.body;
           }
-        });
+        }, error => DaoUtil.logError(error));
     }, delay * 1000);
   }
 

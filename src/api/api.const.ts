@@ -13,6 +13,18 @@ export class API {
       "dev": function (aDo, at) {
         return `http://localhost:8080/server_management/server/manipulation?do=${aDo}&at=${at}`;
       }
+    },
+    "server/config": {
+      "prod": "/server_management/server/config",
+      "dev": "http://localhost:8080/server_management/server/config"
+    },
+    "server/config/get": {
+      "prod": function () {
+
+      },
+      "dev": function (serverName) {
+        return `http://localhost:8080/server_management/server/config/get?serverName=${serverName}`;
+      }
     }
   };
 

@@ -21,7 +21,7 @@
         "styles.css"
       ],
       "scripts": [
-        "./node_modules/ng2-file-upload/ng2-file-upload.js"
+        "../node_modules/ng2-file-upload/ng2-file-upload.js"
       ],
       "environments": {
         "source": "environments/environment.ts",

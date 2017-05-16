@@ -95,6 +95,60 @@ span.status.running {
   background-color: #333;
 }
 
+.progress {
+  background-color: #333333;
+}
+
+.progress-bar {
+  background-color: #00ff1f;
+}
+
+.progress, .progress-bar {
+  height: 10px;
+}
+
+.btn-s {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.configs {
+  position: fixed;
+  z-index: 100000;
+
+  width: 90%;
+  height: 100%;
+
+  top: 0;
+  right: 0;
+
+  background-color: rgba(153, 153, 153, 0.91);
+
+  box-shadow: 0 0 10px blue;
+
+  transition: transform .6s ease-in-out;
+}
+
+.configs:not(.show) {
+  transform: translateX(100%);
+}
+
+.configs > textarea {
+  width: 98%;
+  height: 90%;
+  margin: 1% 0 0 1%;
+  resize: none;
+  outline: none;
+  border-radius: 3px;
+  border: solid 1px #999;
+  line-height: 20px;
+  font-size: 16px;
+}
+
+.configs > textarea:focus {
+  box-shadow: 0 0 5px blue;
+}
+
 /* 试验品 */
 span.status > i.left {
   position: absolute;
@@ -266,21 +320,4 @@ span.status > i.right-down.after {
 
   animation: 4s linear 0s infinite;
   animation-name: move_right-down_after;
-}
-
-.progress {
-  background-color: #333333;
-}
-
-.progress-bar {
-  background-color: #00ff1f;
-}
-
-.progress, .progress-bar {
-  height: 10px;
-}
-
-.btn-s {
-  margin-top: 10px;
-  margin-bottom: 10px;
 }
