@@ -48,21 +48,31 @@
 <div>
   <div>
     <input #FileInput type="file" style="display: none;" ng2FileSelect [uploader]="uploader"/>
-    <button class="btn" (click)="selectFile()">选择文件</button>&nbsp;&nbsp;<span>Queue Progress :</span>
+    <div style="overflow: hidden;padding: 10px 0;">
+      <button class="btn" (click)="selectFile()">选择文件</button>
+      <br><br>
+      <p style="text-decoration: underline">Queue Progress :</p>
+    </div>
     <div class="progress" style="">
       <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
     </div>
   </div>
   <button type="button" class="btn btn-success btn-s"
-          (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+          (click)="uploader.uploadAll()"
+          [disabled]="!uploader.getNotUploadedItems().length"
+          [class.disabled]="!uploader.getNotUploadedItems().length">
     Upload all
   </button>
   <button type="button" class="btn btn-warning btn-s"
-          (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+          (click)="uploader.cancelAll()"
+          [disabled]="!uploader.isUploading"
+          [class.disabled]="!uploader.isUploading">
     Cancel all
   </button>
   <button type="button" class="btn btn-danger btn-s"
-          (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+          (click)="uploader.clearQueue()"
+          [disabled]="!uploader.queue.length"
+          [class.disabled]="!uploader.queue.length">
     Remove all
   </button>
 </div>
@@ -93,11 +103,15 @@
     </td>
     <td nowrap>
       <button type="button" class="btn btn-success btn-xs"
-              (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+              (click)="item.upload()"
+              [disabled]="item.isReady || item.isUploading || item.isSuccess"
+              [class.disabled]="item.isReady || item.isUploading || item.isSuccess">
         Upload
       </button>
       <button type="button" class="btn btn-warning btn-xs"
-              (click)="item.cancel()" [disabled]="!item.isUploading">
+              (click)="item.cancel()"
+              [disabled]="!item.isUploading"
+              [class.disabled]="!item.isUploading">
         Cancel
       </button>
       <button type="button" class="btn btn-danger btn-xs"
