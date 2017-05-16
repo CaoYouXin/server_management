@@ -123,9 +123,10 @@ span.status.running {
   top: 0;
   right: 0;
 
+  border-bottom-left-radius: 1.61812298em;
   background-color: rgba(153, 153, 153, 0.91);
 
-  box-shadow: 0 0 10px blue;
+  box-shadow: 0 0 10px blue, 0 0 5px black;
 
   transition: transform .6s ease-in-out;
 }
