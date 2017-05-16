@@ -18,17 +18,26 @@ export class AppComponent implements OnInit {
     isHTML5: true
   });
   showConfigs = false;
-  serverConfigs: string;
   configServerName: string;
 
   @ViewChild("FileInput")
   private fileInput: ElementRef;
+
+  @ViewChild("scTextarea")
+  private scTextarea: ElementRef;
+
+  private editor: any;
 
   constructor(private dao: DaoUtil) {}
 
   ngOnInit() {
     API.setProductMode(false);
     this.loadServers(0);
+
+    this.editor = window['CodeMirror'].fromTextArea(this.scTextarea.nativeElement, {
+      lineNumbers: true
+    });
+    console.log(this.editor);
   }
 
   selectFile() {
@@ -42,7 +51,7 @@ export class AppComponent implements OnInit {
       .subscribe(ret => {
         if (ret.code === 20000) {
           self.showConfigs = true;
-          self.serverConfigs = ret.body;
+          self.editor.getDoc().setValue(ret.body);
           self.configServerName = name;
         } else {
           alert(ret.body);
@@ -54,7 +63,7 @@ export class AppComponent implements OnInit {
     let self = this;
     this.dao.post(API.getAPI("server/config"), {
       serverName: this.configServerName,
-      configs: this.serverConfigs
+      configs: self.editor.getDoc().getValue()
     }).map(res => res.json())
       .subscribe(ret => {
         if (ret.code === 20000) {

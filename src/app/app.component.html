@@ -110,7 +110,7 @@
 </table>
 
 <div class="configs" [class.show]="showConfigs">
-  <textarea [(ngModel)]="serverConfigs"></textarea>
+  <textarea #scTextarea ></textarea>
   <div>
     <button class="btn" (click)="submitServerConfigs()">提交</button>
     <button class="btn" (click)="serverConfigs = ''">重置</button>
