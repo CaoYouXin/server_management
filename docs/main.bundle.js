@@ -206,7 +206,7 @@ var AppComponent = (function () {
             .map(function (res) { return res.json(); })
             .subscribe(function (ret) {
             if (20000 === ret.code) {
-                _this.loadServers(2);
+                _this.loadServers(3);
             }
         }, function (error) { return __WEBPACK_IMPORTED_MODULE_1__dao_dao_util__["a" /* DaoUtil */].logError(error); });
     };
@@ -217,7 +217,7 @@ var AppComponent = (function () {
             .map(function (res) { return res.json(); })
             .subscribe(function (ret) {
             if (20000 === ret.code) {
-                _this.loadServers(2);
+                _this.loadServers(6);
             }
         }, function (error) { return __WEBPACK_IMPORTED_MODULE_1__dao_dao_util__["a" /* DaoUtil */].logError(error); });
     };
@@ -228,7 +228,7 @@ var AppComponent = (function () {
             .map(function (res) { return res.json(); })
             .subscribe(function (ret) {
             if (20000 === ret.code) {
-                _this.loadServers(2);
+                _this.loadServers(6);
             }
         }, function (error) { return __WEBPACK_IMPORTED_MODULE_1__dao_dao_util__["a" /* DaoUtil */].logError(error); });
     };
@@ -239,7 +239,7 @@ var AppComponent = (function () {
             .map(function (res) { return res.json(); })
             .subscribe(function (ret) {
             if (20000 === ret.code) {
-                _this.loadServers(2);
+                _this.loadServers(7);
             }
         }, function (error) { return __WEBPACK_IMPORTED_MODULE_1__dao_dao_util__["a" /* DaoUtil */].logError(error); });
     };

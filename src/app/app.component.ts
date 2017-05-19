@@ -94,7 +94,7 @@ export class AppComponent implements OnInit {
       .map(res => res.json())
       .subscribe(ret => {
         if (20000 === ret.code) {
-          this.loadServers(2);
+          this.loadServers(3);
         }
       }, error => DaoUtil.logError(error));
   }
@@ -105,7 +105,7 @@ export class AppComponent implements OnInit {
       .map(res => res.json())
       .subscribe(ret => {
         if (20000 === ret.code) {
-          this.loadServers(2);
+          this.loadServers(6);
         }
       }, error => DaoUtil.logError(error));
   }
@@ -116,7 +116,7 @@ export class AppComponent implements OnInit {
       .map(res => res.json())
       .subscribe(ret => {
         if (20000 === ret.code) {
-          this.loadServers(2);
+          this.loadServers(6);
         }
       }, error => DaoUtil.logError(error));
   }
@@ -127,7 +127,7 @@ export class AppComponent implements OnInit {
       .map(res => res.json())
       .subscribe(ret => {
         if (20000 === ret.code) {
-          this.loadServers(2);
+          this.loadServers(7);
         }
       }, error => DaoUtil.logError(error));
   }
