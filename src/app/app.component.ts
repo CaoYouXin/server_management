@@ -14,6 +14,7 @@ import {environment} from "../environments/environment";
 export class AppComponent implements OnInit {
   title = '服务器管理器';
   servers = [];
+  doing = [];
   uploader: FileUploader = new FileUploader({
     url: "http://localhost:8080/server_management/upload",
     isHTML5: true
@@ -34,7 +35,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     API.setProductMode(environment.production);
-    this.loadServers(0);
+    this.loadServers(0, null);
 
     this.editor = window['CodeMirror'].fromTextArea(this.scTextarea.nativeElement, {
       lineNumbers: true
@@ -45,7 +46,7 @@ export class AppComponent implements OnInit {
     this.fileInput.nativeElement.click();
   }
 
-  config(name: string) {
+  config(i: number, name: string) {
     let self = this;
     this.dao.get(API.getAPI("server/config/get")(name))
       .map(res => res.json())
@@ -75,59 +76,63 @@ export class AppComponent implements OnInit {
       }, error => DaoUtil.logError(error));
   }
 
-  loadServers(delay: number) {
+  loadServers(delay: number, i: number) {
     let self = this;
+    if (i !== null) {
+      this.doing[i] = true;
+    }
     setTimeout(() => {
       this.dao.get(API.getAPI("server/list"))
         .map(res => res.json())
         .subscribe(ret => {
           if (ret.code === 20000) {
             self.servers = ret.body;
+            self.doing = [];
           }
         }, error => DaoUtil.logError(error));
     }, delay * 1000);
   }
 
-  deploy(name: string) {
+  deploy(i: number, name: string) {
     let self = this;
     this.dao.get(API.getAPI("server/manipulation")('deploy', name))
       .map(res => res.json())
       .subscribe(ret => {
         if (20000 === ret.code) {
-          this.loadServers(3);
+          this.loadServers(3, i);
         }
       }, error => DaoUtil.logError(error));
   }
 
-  start(name: string) {
+  start(i: number, name: string) {
     let self = this;
     this.dao.get(API.getAPI("server/manipulation")('start', name))
       .map(res => res.json())
       .subscribe(ret => {
         if (20000 === ret.code) {
-          this.loadServers(6);
+          this.loadServers(6, i);
         }
       }, error => DaoUtil.logError(error));
   }
 
-  stop(name: string) {
+  stop(i: number, name: string) {
     let self = this;
     this.dao.get(API.getAPI("server/manipulation")('stop', name))
       .map(res => res.json())
       .subscribe(ret => {
         if (20000 === ret.code) {
-          this.loadServers(6);
+          this.loadServers(6, i);
         }
       }, error => DaoUtil.logError(error));
   }
 
-  restart(name: string) {
+  restart(i: number, name: string) {
     let self = this;
     this.dao.get(API.getAPI("server/manipulation")('restart', name))
       .map(res => res.json())
       .subscribe(ret => {
         if (20000 === ret.code) {
-          this.loadServers(7);
+          this.loadServers(7, i);
         }
       }, error => DaoUtil.logError(error));
   }

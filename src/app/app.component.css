@@ -54,8 +54,18 @@ tr:nth-child(even) > td {
   background-color: #edffd5;
 }
 
-div.status {
+@keyframes my-blink {
+  from {
+    opacity: 1;
+  }
 
+  to {
+   opacity: 0;
+  }
+}
+
+div.status.doing {
+  animation: my-blink 2s linear 0s infinite alternate;
 }
 
 span.status {

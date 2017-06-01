@@ -14,11 +14,11 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let server of servers">
+  <tr *ngFor="let server of servers; let i = index;">
     <td>{{server.type}}</td>
     <td>{{server.name}}</td>
     <td>
-      <div class="status">
+      <div class="status" [class.doing]="doing[i]">
         <span class="status zip" *ngIf="server.status === 'zip'"></span>
         <span class="status stop" *ngIf="server.status === 'stop'"></span>
         <span class="status running" *ngIf="server.status === 'running'">
@@ -33,12 +33,12 @@
       </div>
     </td>
     <td>
-      <button class="btn" *ngIf="!server.deployed" (click)="deploy(server.name)">部署</button>
-      <button class="btn" *ngIf="server.deployed" (click)="config(server.name)">配置</button>
-      <button class="btn" *ngIf="server.deployed && server.status !== 'running'" (click)="start(server.name)">启动
+      <button class="btn" *ngIf="!server.deployed" (click)="deploy(i, server.name)">部署</button>
+      <button class="btn" *ngIf="server.deployed" (click)="config(i, server.name)">配置</button>
+      <button class="btn" *ngIf="server.deployed && server.status !== 'running'" (click)="start(i, server.name)">启动
       </button>
-      <button class="btn" *ngIf="server.deployed && server.status === 'running'" (click)="stop(server.name)">关闭</button>
-      <button class="btn" *ngIf="server.deployed && server.status === 'running'" (click)="restart(server.name)">重启
+      <button class="btn" *ngIf="server.deployed && server.status === 'running'" (click)="stop(i, server.name)">关闭</button>
+      <button class="btn" *ngIf="server.deployed && server.status === 'running'" (click)="restart(i, server.name)">重启
       </button>
     </td>
   </tr>
